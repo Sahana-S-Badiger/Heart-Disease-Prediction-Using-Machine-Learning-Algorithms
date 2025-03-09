@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap');
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+
+        :root {
+            --primary-bg-color: #FFA07A; /* Lighter salmon color */
+            --secondary-bg-color: #FF6347; /* Tomato color */
+            --font-color: #333;
+            --font-family: 'Montserrat', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #EBC1B3; /* Increased brightness */
+            color: var(--font-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: var(--font-family);
+            font-size: 16px;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            padding: 20px;
+            background: #ebcccc;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .container header h1 {
+            font-size: 28px;
+            color: var(--secondary-bg-color);
+            margin-bottom: 20px;
+        }
+
+        .result {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .encouragement {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .btn {
+            background: var(--secondary-bg-color);
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: #e55347;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Prediction Result</h1>
+        </header>
+        <div class="result">
+            <p>{{ result }}</p>
+        </div>
+        {% if result == "You may be at risk of heart failure." %}
+        <div class="encouragement">
+            <p>Don't be discouraged. Many people manage heart conditions with the right treatment and lifestyle changes. Please consult with a healthcare professional for further advice.</p>
+        </div>
+        {% endif %}
+        <footer>
+            <a href="{% url 'predict' %}" class="btn">Predict Again</a>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{% extends 'newApp/base.html' %}
+
+{% block title %}Home - Heart Disease Prediction{% endblock %}
+
+{% block content %}
+{% load static %}
+<div class="home-container">
+    <div class="intro">
+        <h1>Welcome to Heart Disease Prediction</h1>
+        <p>With our advanced prediction , you can take charge of your heart health. Get started by signing up or logging in to make a prediction.</p>
+        <a href="{% url 'predict' %}" class="btn">Predict Now</a>
+    </div>
+</div>
+{% endblock %}

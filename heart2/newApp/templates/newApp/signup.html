@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'signup.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Create Account</h1>
+        </header>
+        <form method="post" action="{% url 'signup' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Sign Up</button>
+        </form>
+        <div class="toggle-link">
+            <a href="{% url 'signin' %}">Already have an account? Sign In</a>
+        </div>
+    </div>
+
+    {% if messages %}
+        <div id="message-popup" class="message-popup {{ messages.tags }}">
+            <p>{{ messages }}</p>
+        </div>
+    {% endif %}
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const messagePopup = document.getElementById("message-popup");
+            if (messagePopup) {
+                messagePopup.classList.add('show');
+                setTimeout(() => {
+                    messagePopup.classList.remove('show');
+                    messagePopup.classList.add('hide');
+                    <!DOCTYPE html>
+                    <html lang="en">
+                    <head>
+                        <meta charset="UTF-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <title>Sign Up</title>
+                        {% load static %}
+                        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap">
+                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+                        <link rel="stylesheet" href="{% static 'signup.css' %}">
+                    </head>
+                    <body>
+                        <div class="container">
+                            <header>
+                                <h1>Create Account</h1>
+                            </header>
+                            <form method="post" action="{% url 'signup' %}">
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                <button type="submit">Sign Up</button>
+                            </form>
+                            <div class="toggle-link">
+                                <a href="{% url 'signin' %}">Already have an account? Sign In</a>
+                            </div>
+                    
+                            {% if messages %}
+                                <div id="message-popup" class="message-popup {{ messages.tags }}">
+                                    <p>{{ messages }}</p>
+                                </div>
+                            {% endif %}
+                    
+                            <script>
+                                document.addEventListener("DOMContentLoaded", function() {
+                                    const messagePopup = document.getElementById("message-popup");
+                                    if (messagePopup) {
+                                        messagePopup.classList.add('show');
+                                        setTimeout(() => {
+                                            messagePopup.classList.remove('show');
+                                            messagePopup.classList.add('hide');
+                                        }, 3000);
+                                    }
+                                });
+                            </script>
+                        </div>
+                    </body>
+                    </html>
+                    

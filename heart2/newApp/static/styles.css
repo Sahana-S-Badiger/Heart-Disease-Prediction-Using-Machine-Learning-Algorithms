@@ -1,0 +1,164 @@
+/* Root Variables */
+:root {
+    --primary-bg-color: #FFA07A; /* Lighter salmon color */
+    --secondary-bg-color: #FF6347; /* Tomato color */
+    --font-color: #333;
+    --font-family: 'Montserrat', sans-serif;
+    --transition-duration: 0.3s;
+    --box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Reset and Global Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #EBC1B3; /* Lightened background */
+    color: var(--font-color);
+    font-family: var(--font-family);
+    font-size: 18px; /* Increased base font size */
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Navigation Bar */
+nav {
+    position: fixed; /* Navbar fixed to the top */
+    top: 0;
+    left: 0;
+    width: 100%; /* Full-width navbar */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--secondary-bg-color);
+    padding: 25px 60px; /* Increased padding for size adjustment */
+    z-index: 1000; /* Keeps it above all other content */
+    box-shadow: var(--box-shadow);
+}
+
+nav .logo a {
+    color: white;
+    font-size: 32px; /* Enlarged logo text */
+    text-decoration: none;
+    font-weight: 800; /* Bold text for logo */
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 40px; /* Increased spacing between menu items */
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 24px; /* Larger font size for menu items */
+    padding: 20px 35px; /* Increased padding for better clickable area */
+    border-radius: 10px; /* Rounded corners */
+    transition: background var(--transition-duration), transform var(--transition-duration);
+}
+
+nav ul li a:hover {
+    background: #0056b3; /* Slightly darker blue */
+    transform: translateY(-5px); /* Subtle lift effect on hover */
+}
+
+/* Home Container */
+.home-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;  /* Align items to the top of the container */
+    align-items: center;  /* Center content horizontally */
+    text-align: center;
+    height: calc(100vh - 120px); /* Adjust height to account for navbar */
+    margin-top: 120px; /* Offset the fixed navbar height */
+    background: var(--primary-bg-color);
+    padding: 30px;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+
+.home-container h1 {
+    font-size: 5rem;
+    font-weight: 700;
+    margin-top: 30px;  /* Adjusted margin to push the heading down from the top */
+    margin-bottom: 30px;
+    color: var(--secondary-bg-color);
+}
+
+
+.home-container p {
+    font-size: 1.8rem; /* Larger paragraph size */
+    margin-bottom: 40px;
+    color: var(--font-color);
+}
+
+.home-container .btn {
+    background: var(--secondary-bg-color);
+    color: white;
+    padding: 20px 40px; /* Larger button */
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 1.5rem; /* Larger button text */
+    font-weight: bold;
+    box-shadow: var(--box-shadow);
+    transition: transform var(--transition-duration), background var(--transition-duration);
+}
+
+.home-container .btn:hover {
+    background: #0056b3; /* Slightly darker blue */
+    transform: translateY(-8px); /* Increased hover effect */
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    nav {
+        padding: 20px 30px; /* Adjust padding for smaller screens */
+    }
+
+    nav .logo a {
+        font-size: 28px; /* Adjusted logo size */
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav ul li a {
+        font-size: 20px; /* Adjusted font size */
+        padding: 15px 25px; /* Reduced padding */
+    }
+
+    .home-container h1 {
+        font-size: 3.5rem; /* Smaller heading size */
+    }
+
+    .home-container p {
+        font-size: 1.5rem;
+    }
+
+    .home-container .btn {
+        padding: 15px 30px; /* Adjusted button size */
+        font-size: 1.25rem;
+    }
+}

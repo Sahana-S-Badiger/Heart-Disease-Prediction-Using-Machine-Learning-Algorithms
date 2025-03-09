@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Disease Prediction</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <style>
+        /* Styles for the Know More icon */
+        #know-more-icon {
+            cursor: pointer;
+            margin-left: 5px;
+            color: #007BFF;
+            font-size: 1rem;
+        }
+
+        /* Popup modal styles */
+        .popup-modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .popup-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 500px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .close-popup {
+            float: right;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            color: #555;
+        }
+
+        .close-popup:hover {
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-section">
+            <h1><i class="fas fa-heartbeat"></i> Heart Disease Prediction</h1>
+        </div>
+        <div class="right-section">
+            <header>
+                <h1>Heart Disease Prediction</h1>
+            </header>
+            <form method="POST" action="{% url 'predict' %}">
+                {% csrf_token %}
+                {% if form.errors %}
+                    <div class="form-errors">
+                        <ul>
+                            {% for field in form %}
+                                {% for error in field.errors %}
+                                    <li>{{ field.label }}: {{ error }}</li>
+                                {% endfor %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+                <p>
+                    <label for="age">Age:</label>
+                    <input type="number" name="age" id="age" required>
+                </p>
+                <p>
+                    <label for="sex">Sex:</label>
+                    <div>
+                        <button type="button" class="btn-male-female" onclick="setInputValue('sex', 1)">Male</button>
+                        <button type="button" class="btn-male-female" onclick="setInputValue('sex', 0)">Female</button>
+                    </div>
+                    <input type="hidden" name="sex" id="sex">
+                </p>
+                <p>
+                    <label for="chest_pain_type">Chest Pain Type:</label>
+                    <i class="fas fa-info-circle" id="know-more-icon" title="Know More"></i> <!-- Know More Icon -->
+                    <select name="chest_pain_type" id="chest_pain_type" required>
+                        <option value="0">Typical Angina</option>
+                        <option value="1">Atypical Angina</option>
+                        <option value="2">Non-anginal Pain</option>
+                        <option value="3">Asymptomatic</option>
+                    </select>
+                </p>
+
+                <!-- Popup Modal -->
+                <div id="popup-modal" class="popup-modal">
+                    <div class="popup-content">
+                        <span class="close-popup">&times;</span>
+                        <h2>Types of Chest Pain</h2>
+                        <ul>
+                            <li><strong>Typical Angina:</strong> Pressure or tightness in the chest caused by reduced blood flow to the heart.</li>
+                            <li><strong>Atypical Angina:</strong> Pain that is not typical and may occur in the jaw, neck, or back.</li>
+                            <li><strong>Non-anginal Pain:</strong> Pain not related to the heart, such as due to muscle strain.</li>
+                            <li><strong>Asymptomatic:</strong> No chest pain symptoms, often detected in other examinations.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <p>
+                    <label for="resting_bp">Resting BP:</label>
+                    <input type="number" name="resting_bp" id="resting_bp" required>
+                </p>
+                <p>
+                    <label for="cholesterol">Cholesterol:</label>
+                    <input type="number" name="cholesterol" id="cholesterol" required>
+                </p>
+                <p>
+                    <label for="fasting_bs">Fasting BS:</label>
+                    <div class="yes-no-buttons">
+                        <button type="button" class="btn-male-female" onclick="setInputValue('fasting_bs', 1)">Yes</button>
+                        <button type="button" class="btn-male-female" onclick="setInputValue('fasting_bs', 0)">No</button>
+                    </div>
+                    <input type="hidden" name="fasting_bs" id="fasting_bs">
+                </p>
+                <p>
+                    <label for="resting_ecg">Resting ECG:</label>
+                    <select name="resting_ecg" id="resting_ecg" required>
+                        <option value="0">Normal</option>
+                        <option value="1">ST-T Wave Abnormality</option>
+                        <option value="2">Left Ventricular Hypertrophy</option>
+                    </select>
+                </p>
+                <p>
+                    <label for="max_hr">Max HR:</label>
+                    <input type="number" name="max_hr" id="max_hr" required>
+                </p>
+                <p>
+                    <label for="exercise_angina">Exercise Angina:</label>
+                    <div class="yes-no-buttons">
+                        <button type="button" class="btn-male-female" onclick="setInputValue('exercise_angina', 1)">Yes</button>
+                        <button type="button" class="btn-male-female" onclick="setInputValue('exercise_angina', 0)">No</button>
+                    </div>
+                    <input type="hidden" name="exercise_angina" id="exercise_angina">
+                </p>
+                <p>
+                    <label for="oldpeak">Oldpeak:</label>
+                    <input type="number" step="0.1" name="oldpeak" id="oldpeak" required>
+                </p>
+                <p>
+                    <label for="slope">Slope:</label>
+                    <select name="slope" id="slope" required>
+                        <option value="0">Upsloping</option>
+                        <option value="1">Flat</option>
+                        <option value="2">Downsloping</option>
+                    </select>
+                </p>
+                <footer>
+                    <button type="submit" class="btn">Predict</button>
+                </footer>
+            </form>
+            {% if result %}
+                <div class="result">
+                    <h2>Prediction Result</h2>
+                    <p>{{ result }}</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        // Function to set hidden input values
+        function setInputValue(inputId, value) {
+            document.getElementById(inputId).value = value;
+        }
+
+        // Modal functionality
+        const modal = document.getElementById('popup-modal');
+        const icon = document.getElementById('know-more-icon');
+        const close = document.querySelector('.close-popup');
+
+        // Show modal when icon is clicked
+        icon.addEventListener('click', () => {
+            modal.style.display = 'block';
+        });
+
+        // Close modal when the close button is clicked
+        close.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        // Close modal when clicking outside the modal
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

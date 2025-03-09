@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+
+:root {
+    --primary-bg-color: #FFA07A; /* Lighter salmon color */
+    --secondary-bg-color: #FF6347; /* Tomato color */
+    --font-color: #333;
+    --font-family: 'Montserrat', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #EBC1B3; /* Background color */
+    color: var(--font-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--font-family);
+    font-size: 16px;
+    height: 100vh;
+    width: 100vw;
+}
+
+.container {
+    max-width: 500px;
+    width: 100%;
+    padding: 30px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    font-size: 28px;
+    color: var(--font-color);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form p {
+    margin-bottom: 15px;
+}
+
+form label {
+    font-weight: 600;
+    color: var(--font-color);
+    margin-bottom: 5px;
+    display: block;
+}
+
+form input {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 16px;
+    width: 100%;
+}
+
+form button {
+    background: var(--secondary-bg-color);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 15px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.3s ease;
+}
+
+form button:hover {
+    background: #e55347; /* Slightly darker tomato color */
+}
+
+.toggle-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.toggle-link a {
+    color: var(--secondary-bg-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.toggle-link a:hover {
+    text-decoration: underline;
+}
+
+/* Success and error message styles */
+.messages {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.message-popup {
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #d4edda;
+    color: #155724;
+    padding: 15px;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+    z-index: 1000;
+}
+
+.message-popup.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.message-popup.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.message-popup.show {
+    display: block;
+}
+
+.message-popup.hide {
+    display: none;
+}
